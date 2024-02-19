@@ -1,22 +1,24 @@
 import React from 'react';
 import {Text, View, StyleSheet, SafeAreaView} from 'react-native';
-import Header from '../components/Header';
-import Survey from '../components/Survey';
 
-const Home = () => {
+const Survey = () => {
   return (
     <SafeAreaView style={styles.container}>
-      <Header />
-      <Survey />
+      <View>
+        <Text style={styles.text}>Survey</Text>
+      </View>
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: 'black',
+    height: 'auto',
+  },
+  text: {
+    color: 'white',
+    fontSize: 20,
   },
 });
 
-export default Home;
+export default Survey;
