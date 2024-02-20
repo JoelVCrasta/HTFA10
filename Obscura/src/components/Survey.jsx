@@ -25,9 +25,20 @@ const Survey = () => {
 
   const allData = `name: ${data.name}, occupation: ${data.occupation}, amount: ${data.amount}, purchases: ${data.purchases}, likely: ${data.likely}`;
 
+  const key = CryptoJS.enc.Utf8.parse('v5T2RpmzkuU2qyMQXVYyqx7Wpnv');
+  const iv = CryptoJS.enc.Utf8.parse('EqZywEkfyeZkpGt2');
+
   function hashData() {
-    const jsonString = JSON.stringify(allData);
-    return CryptoJS.SHA256(jsonString).toString(CryptoJS.enc.Hex);
+    console.log(allData);
+    const encrypted = CryptoJS.AES.encrypt(allData, key, {
+      iv: iv,
+      mode: CryptoJS.mode.CBC,
+      padding: CryptoJS.pad.Pkcs7,
+    });
+    return encrypted.toString();
+
+    /*  const jsonString = JSON.stringify(allData);
+    return CryptoJS.SHA256(jsonString).toString(CryptoJS.enc.Hex); */
     //return cryptData;
     /* const saltRounds = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(allData, saltRounds);
