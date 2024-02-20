@@ -1,0 +1,101 @@
+Customer ID,Age,Gender,Item Purchased,Purchase Amount (USD),Location,Color,Frequency of Purchases
+398,58,Female,Boots,39,Mississippi,Violet,Fortnightly
+506,26,Male,Dress,65,Delaware,Beige,Weekly
+3728,62,Female,Socks,94,Ohio,Silver,Annually
+2747,57,Male,Shoes,38,Oregon,Teal,Every 3 Months
+3206,28,Female,Jacket,57,New York,Charcoal,Annually
+2831,41,Female,Blouse,42,Montana,Peach,Weekly
+1671,51,Male,Sweater,37,South Carolina,Gray,Annually
+1318,31,Male,Dress,31,West Virginia,Gray,Fortnightly
+1096,18,Male,Blouse,59,Louisiana,Silver,Quarterly
+684,47,Male,Dress,77,Idaho,Silver,Bi-Weekly
+2124,69,Male,Skirt,65,Tennessee,White,Weekly
+1260,66,Male,Belt,24,California,Silver,Annually
+211,41,Male,Dress,99,Nebraska,Maroon,Every 3 Months
+1207,69,Female,Handbag,92,Kansas,Beige,Bi-Weekly
+2743,22,Female,Sweater,69,Tennessee,Silver,Monthly
+536,58,Male,Hoodie,92,Illinois,Cyan,Fortnightly
+3750,24,Female,Coat,31,Massachusetts,Olive,Monthly
+1325,20,Male,Jacket,83,Nebraska,Olive,Bi-Weekly
+2238,18,Male,Jeans,76,Montana,Brown,Fortnightly
+3556,37,Female,Boots,25,Maryland,Magenta,Every 3 Months
+1460,70,Male,Sunglasses,41,Oklahoma,Lavender,Quarterly
+1357,62,Male,Sneakers,84,Montana,Teal,Monthly
+2058,47,Male,Skirt,51,Oregon,Red,Bi-Weekly
+473,43,Male,Sunglasses,83,Georgia,Indigo,Bi-Weekly
+1911,21,Male,Jeans,35,New York,Beige,Monthly
+3433,27,Female,Handbag,38,Nevada,Black,Fortnightly
+185,30,Male,Sweater,40,Indiana,Maroon,Annually
+592,70,Male,Gloves,33,New York,Orange,Annually
+925,58,Female,Boots,43,Nebraska,Charcoal,Monthly
+257,59,Male,Coat,83,Utah,Black,Fortnightly
+1982,44,Male,Scarf,74,New Mexico,Charcoal,Fortnightly
+2703,29,Female,Jewelry,40,Montana,Orange,Annually
+166,30,Male,Socks,43,West Virginia,Blue,Every 3 Months
+3775,27,Female,Shirt,52,Oregon,Green,Quarterly
+896,19,Male,T-shirt,65,Rhode Island,Peach,Fortnightly
+2489,35,Male,Gloves,64,Georgia,Purple,Bi-Weekly
+3321,29,Female,Dress,48,Georgia,Olive,Every 3 Months
+2102,40,Male,Sunglasses,85,Delaware,Maroon,Every 3 Months
+796,46,Male,Sunglasses,83,Missouri,Gray,Annually
+1779,32,Male,Jacket,63,Arizona,Indigo,Annually
+32,35,Male,Shoes,100,Florida,Olive,Annually
+349,31,Male,T-shirt,29,Connecticut,Silver,Bi-Weekly
+326,58,Male,Hat,56,Oklahoma,Turquoise,Annually
+743,59,Female,Shirt,53,Hawaii,Indigo,Bi-Weekly
+2653,55,Male,Gloves,61,Nebraska,Cyan,Weekly
+743,52,Male,Jeans,78,Wisconsin,Brown,Weekly
+1211,18,Male,Skirt,29,New Hampshire,Gray,Fortnightly
+3678,40,Male,Boots,75,Vermont,Turquoise,Every 3 Months
+1686,49,Male,T-shirt,90,Indiana,Charcoal,Quarterly
+1570,56,Male,Socks,41,Maryland,Charcoal,Bi-Weekly
+287,59,Male,Shirt,38,Idaho,Teal,Weekly
+3422,70,Female,Belt,53,Virginia,Charcoal,Fortnightly
+3178,38,Male,Scarf,88,Maryland,Yellow,Fortnightly
+3339,66,Female,Backpack,49,Washington,Green,Weekly
+993,41,Male,Backpack,43,Indiana,Violet,Fortnightly
+2495,66,Male,Hat,92,Idaho,Charcoal,Annually
+3002,31,Female,Jeans,62,Ohio,Black,Every 3 Months
+3857,66,Male,T-shirt,24,Kentucky,Maroon,Annually
+1292,51,Male,Shorts,30,Washington,Teal,Annually
+2196,33,Male,T-shirt,38,Wisconsin,Black,Quarterly
+23,20,Female,Shoes,65,Alaska,Red,Every 3 Months
+3313,24,Female,Socks,63,Oregon,Peach,Quarterly
+2544,38,Male,Pants,64,Vermont,Charcoal,Annually
+306,69,Male,Sweater,89,Iowa,Pink,Annually
+915,64,Male,Belt,44,Texas,Purple,Quarterly
+131,51,Male,Skirt,37,Wisconsin,Teal,Quarterly
+245,24,Male,Sneakers,85,Missouri,Cyan,Monthly
+1534,44,Male,Sweater,85,Georgia,Silver,Every 3 Months
+3708,41,Female,Sneakers,98,Indiana,Black,Weekly
+2756,28,Male,Jacket,99,Illinois,Gray,Annually
+891,38,Male,Dress,68,North Carolina,Silver,Quarterly
+2676,18,Female,Gloves,26,Minnesota,Gold,Weekly
+3474,68,Female,Coat,64,Pennsylvania,Yellow,Annually
+3181,27,Male,Hoodie,50,Arizona,Green,Annually
+3725,41,Female,Gloves,76,South Carolina,Green,Weekly
+1020,32,Female,Hat,56,Nebraska,Pink,Quarterly
+2277,27,Male,Belt,78,Louisiana,Peach,Weekly
+2221,44,Male,Belt,77,North Carolina,Cyan,Annually
+573,21,Male,Backpack,79,Maryland,Brown,Annually
+1889,26,Male,Skirt,40,Texas,Gold,Monthly
+1904,65,Male,Hat,71,Georgia,Brown,Every 3 Months
+1317,69,Male,Coat,68,Colorado,Red,Fortnightly
+1535,55,Male,Coat,72,West Virginia,Black,Annually
+2438,57,Male,Sandals,28,Virginia,Maroon,Annually
+1906,56,Male,Handbag,98,Ohio,Pink,Bi-Weekly
+1729,27,Male,Gloves,89,Texas,Maroon,Bi-Weekly
+1272,43,Male,Sunglasses,71,Oregon,Gray,Monthly
+1836,33,Male,Handbag,97,Washington,Orange,Quarterly
+221,47,Male,Gloves,46,Oregon,Purple,Bi-Weekly
+3342,33,Female,Dress,51,Kentucky,Gray,Fortnightly
+2289,60,Male,Dress,27,Rhode Island,Green,Quarterly
+233,43,Female,Sunglasses,50,Alaska,Olive,Bi-Weekly
+1919,54,Male,Sneakers,62,Alaska,Violet,Weekly
+2365,55,Male,Sunglasses,58,New Jersey,Gray,Every 3 Months
+59,54,Male,Sandals,54,Arkansas,Gold,Quarterly
+2795,41,Male,Jacket,29,Hawaii,Pink,Annually
+3714,54,Male,Hoodie,88,Wisconsin,Purple,Weekly
+3097,52,Female,Skirt,79,Arkansas,Gold,Fortnightly
+2986,43,Male,Dress,38,Connecticut,Indigo,Quarterly
+3792,57,Female,Backpack,86,North Dakota,Green,Monthly
