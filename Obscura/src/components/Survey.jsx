@@ -10,7 +10,8 @@ import {
 } from 'react-native';
 import {Picker} from '@react-native-picker/picker';
 import {supabase} from '../lib/supabaseClient.js';
-import bcrypt from 'react-native-bcrypt';
+import CryptoJS from 'crypto-js';
+// import bcrypt from 'react-native-bcrypt';
 
 const Survey = () => {
   const [data, setData] = useState({
@@ -25,15 +26,16 @@ const Survey = () => {
   const allData = `name: ${data.name}, occupation: ${data.occupation}, amount: ${data.amount}, purchases: ${data.purchases}, likely: ${data.likely}`;
 
   function hashData() {
-    const saltRounds = bcrypt.genSaltSync(10);
+    const jsonString = JSON.stringify(allData);
+    return CryptoJS.SHA256(jsonString).toString(CryptoJS.enc.Hex);
+    //return cryptData;
+    /* const saltRounds = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(allData, saltRounds);
-    return hash;
+    return hash; */
   }
 
   const sendData = async () => {
-    console.log(allData);
-    submit();
-    /* try {
+    try {
       const hashedData = hashData();
       const {data, error} = await supabase
         .from('fable')
@@ -44,15 +46,8 @@ const Survey = () => {
       if (error) throw error;
     } catch (error) {
       console.log('Error', error.message);
-    } */
+    }
   };
-
-  function submit() {
-    setIsClicked(true);
-    setTimeout(() => {
-      setIsClicked(false);
-    }, 100);
-  }
 
   return (
     <SafeAreaView style={styles.container}>
@@ -151,9 +146,7 @@ const Survey = () => {
             </View>
           </View>
         </View>
-        <TouchableOpacity
-          onPress={sendData}
-          style={[styles.button, isClicked && styles.clickedButton]}>
+        <TouchableOpacity onPress={sendData} style={styles.button}>
           <Text style={styles.buttonText}>Submit</Text>
         </TouchableOpacity>
       </View>
@@ -204,15 +197,12 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   button: {
-    backgroundColor: '#007BFF',
+    backgroundColor: '#ba181b',
     padding: 10,
     paddingRight: 20,
     paddingLeft: 20,
     borderRadius: 5,
     alignItems: 'center',
-  },
-  clickedButton: {
-    backgroundColor: 'red',
   },
   buttonText: {
     color: 'white',

@@ -13,11 +13,12 @@ const Header = () => {
 
 const styles = StyleSheet.create({
   container: {
-    height: 60,
-    backgroundColor: '#252422',
+    flex: 1,
+    backgroundColor: '#ba181b',
   },
   header: {
     textAlign: 'center',
+    alignItems: 'center',
     fontSize: 30,
     fontWeight: 'bold',
     color: 'white',
