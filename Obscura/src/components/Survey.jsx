@@ -5,26 +5,43 @@ import {
   StyleSheet,
   TextInput,
   Button,
-  Picker,
   SafeAreaView,
 } from 'react-native';
+import {Picker} from '@react-native-picker/picker';
 import {supabase} from '../lib/supabaseClient.js';
+import bcrypt from 'react-native-bcrypt';
 
 const Survey = () => {
   const [data, setData] = useState({
-    
+    name: '',
+    occupation: '',
+    amount: '',
+    purchases: '',
+    likely: '',
   });
 
+  const allData = `name: ${data.name}, occupation: ${data.occupation}, amount: ${data.amount}, purchases: ${data.purchases}, likely: ${data.likely}`;
+
+  function hashData() {
+    const saltRounds = bcrypt.genSaltSync(10);
+    const hash = bcrypt.hashSync(allData, saltRounds);
+    return hash;
+  }
+
   const sendData = async () => {
-    try {
-      const {data, error} = await supabase.from('obscure').insert({name});
+    console.log(allData);
+    /* try {
+      const hashedData = hashData();
+      const {data, error} = await supabase
+        .from('fable')
+        .insert({hash_data: hashedData});
       if (data) {
         console.log(data);
       }
       if (error) throw error;
     } catch (error) {
       console.log('Error', error.message);
-    }
+    } */
   };
 
   const getData = async () => {
@@ -50,8 +67,8 @@ const Survey = () => {
           <View style={styles.box}>
             <TextInput
               style={styles.answer}
-              value={name}
-              onChangeText={name => setName(name)}
+              value={data.name}
+              onChangeText={name => setData({...data, name})}
             />
           </View>
         </View>
@@ -60,40 +77,78 @@ const Survey = () => {
           <View style={styles.box}>
             <TextInput
               style={styles.answer}
-              value={name}
-              onChangeText={name => setName(name)}
+              value={data.occupation}
+              onChangeText={occupation => setData({...data, occupation})}
             />
           </View>
         </View>
         <View style={styles.pbox}>
-          <Text style={styles.question}>How much do you usually spend on purchases</Text>
+          <Text style={styles.question}>
+            How much do you usually spend on purchases
+          </Text>
           <View style={styles.box}>
-            <Picker></Picker>
-          </View>
-        </View>
-        <View style={styles.pbox}>
-          <Text style={styles.question}>How many purchases do you make in a month</Text>
-          <View style={styles.box}>
-            <TextInput
+            <Picker
+              selectedValue={data.amount}
+              onValueChange={itemValue => setData({...data, amount: itemValue})}
+              style={styles.picker}>
+              <Picker.Item label="Less than $50" value="below $50" />
+              <Picker.Item label="$100-$200" value="between $100-$200" />
+              <Picker.Item label="$200-$300" value="between $100-$200" />
+              <Picker.Item label="More than $300" value="above $300" />
+            </Picker>
+            {/* <TextInput
               style={styles.answer}
-              value={name}
-              onChangeText={name => setName(name)}
-            />
+              value={data.amount}
+              onChangeText={amount => setData({...data, amount})}
+            /> */}
           </View>
         </View>
         <View style={styles.pbox}>
-          <Text style={styles.question}>How likely are you to purchase our new products/services</Text>
+          <Text style={styles.question}>
+            How many purchases do you make in a month
+          </Text>
           <View style={styles.box}>
-            <TextInput
+            <Picker
+              selectedValue={data.purchases}
+              onValueChange={itemValue =>
+                setData({...data, purchases: itemValue})
+              }
+              style={styles.picker}>
+              <Picker.Item label="Less than 5" value="below 5" />
+              <Picker.Item label="5-10" value="between 5-10" />
+              <Picker.Item label="10-15" value="between 10-15" />
+              <Picker.Item label="More than 15" value="above 15" />
+            </Picker>
+            {/* <TextInput
               style={styles.answer}
-              value={name}
-              onChangeText={name => setName(name)}
-            />
+              value={data.purchases}
+              onChangeText={purchases => setData({...data, purchases})}
+            /> */}
+          </View>
+        </View>
+        <View style={styles.pbox}>
+          <Text style={styles.question}>
+            How likely are you to purchase our new products/services
+          </Text>
+          <View style={styles.pPicker}>
+            <Picker
+              selectedValue={data.likely}
+              onValueChange={itemValue => setData({...data, likely: itemValue})}
+              style={styles.picker}>
+              <Picker.Item label="Not likely" value="not likely" />
+              <Picker.Item label="Somewhat likely" value="somewhat likely" />
+              <Picker.Item label="Likely" value="likely" />
+            </Picker>
+            {/* <TextInput
+              style={styles.answer}
+              value={data.likely}
+              onChangeText={likely => setData({...data, likely})}
+            /> */}
           </View>
         </View>
         <View>
           <Button title="Submit" onPress={sendData} />
-          <Button title="get" onPress={getData} />
+          <Button title="Get" onPress={getData} />
         </View>
       </View>
     </SafeAreaView>
@@ -106,14 +161,14 @@ const styles = StyleSheet.create({
   },
   question: {
     fontSize: 20,
-    color: 'white',
+    color: 'black',
     alignItems: 'flex-start',
     marginLeft: 20,
     marginBottom: 5,
   },
   answer: {
     width: '90%',
-    color: 'white',
+    color: 'black',
     fontSize: 20,
     borderColor: 'gray',
     borderWidth: 1,
@@ -126,6 +181,21 @@ const styles = StyleSheet.create({
   pbox: {
     width: '100%',
     marginBottom: 20,
+  },
+  picker: {
+    width: '90%',
+    alignItems: 'center',
+    color: 'black',
+    borderColor: 'black',
+    borderWidth: 1,
+    borderRadius: 10,
+  },
+  pPicker: {
+    width: '100%',
+    color: 'black',
+    borderColor: 'black',
+    borderWidth: 1,
+    borderRadius: 10,
   },
 });
 
