@@ -6,6 +6,7 @@ import {
   TextInput,
   Button,
   SafeAreaView,
+  TouchableOpacity,
 } from 'react-native';
 import {Picker} from '@react-native-picker/picker';
 import {supabase} from '../lib/supabaseClient.js';
@@ -15,10 +16,11 @@ const Survey = () => {
   const [data, setData] = useState({
     name: '',
     occupation: '',
-    amount: '',
-    purchases: '',
-    likely: '',
+    amount: 'below $50',
+    purchases: 'below 5',
+    likely: 'not likely',
   });
+  const [isClicked, setIsClicked] = useState(false);
 
   const allData = `name: ${data.name}, occupation: ${data.occupation}, amount: ${data.amount}, purchases: ${data.purchases}, likely: ${data.likely}`;
 
@@ -30,6 +32,7 @@ const Survey = () => {
 
   const sendData = async () => {
     console.log(allData);
+    submit();
     /* try {
       const hashedData = hashData();
       const {data, error} = await supabase
@@ -44,23 +47,15 @@ const Survey = () => {
     } */
   };
 
-  const getData = async () => {
-    try {
-      const {data, error} = await supabase.from('obscure').select('name');
-      if (data) {
-        console.log(data);
-      }
-      if (error) throw error;
-    } catch (error) {
-      console.log('Error', error.message);
-    }
-  };
+  function submit() {
+    setIsClicked(true);
+    setTimeout(() => {
+      setIsClicked(false);
+    }, 100);
+  }
 
   return (
     <SafeAreaView style={styles.container}>
-      <View>
-        <Text style={styles.text}>Survey</Text>
-      </View>
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
         <View style={styles.pbox}>
           <Text style={styles.question}>Enter your name</Text>
@@ -87,20 +82,24 @@ const Survey = () => {
             How much do you usually spend on purchases
           </Text>
           <View style={styles.box}>
-            <Picker
-              selectedValue={data.amount}
-              onValueChange={itemValue => setData({...data, amount: itemValue})}
-              style={styles.picker}>
-              <Picker.Item label="Less than $50" value="below $50" />
-              <Picker.Item label="$100-$200" value="between $100-$200" />
-              <Picker.Item label="$200-$300" value="between $100-$200" />
-              <Picker.Item label="More than $300" value="above $300" />
-            </Picker>
-            {/* <TextInput
+            <View style={styles.pPicker}>
+              <Picker
+                selectedValue={data.amount}
+                onValueChange={itemValue =>
+                  setData({...data, amount: itemValue})
+                }
+                style={styles.picker}>
+                <Picker.Item label="Less than $50" value="below $50" />
+                <Picker.Item label="$100-$200" value="between $100-$200" />
+                <Picker.Item label="$200-$300" value="between $100-$200" />
+                <Picker.Item label="More than $300" value="above $300" />
+              </Picker>
+              {/* <TextInput
               style={styles.answer}
               value={data.amount}
               onChangeText={amount => setData({...data, amount})}
             /> */}
+            </View>
           </View>
         </View>
         <View style={styles.pbox}>
@@ -108,48 +107,55 @@ const Survey = () => {
             How many purchases do you make in a month
           </Text>
           <View style={styles.box}>
-            <Picker
-              selectedValue={data.purchases}
-              onValueChange={itemValue =>
-                setData({...data, purchases: itemValue})
-              }
-              style={styles.picker}>
-              <Picker.Item label="Less than 5" value="below 5" />
-              <Picker.Item label="5-10" value="between 5-10" />
-              <Picker.Item label="10-15" value="between 10-15" />
-              <Picker.Item label="More than 15" value="above 15" />
-            </Picker>
-            {/* <TextInput
+            <View style={styles.pPicker}>
+              <Picker
+                selectedValue={data.purchases}
+                onValueChange={itemValue =>
+                  setData({...data, purchases: itemValue})
+                }
+                style={styles.picker}>
+                <Picker.Item label="Less than 5" value="below 5" />
+                <Picker.Item label="5-10" value="between 5-10" />
+                <Picker.Item label="10-15" value="between 10-15" />
+                <Picker.Item label="More than 15" value="above 15" />
+              </Picker>
+              {/* <TextInput
               style={styles.answer}
               value={data.purchases}
               onChangeText={purchases => setData({...data, purchases})}
             /> */}
+            </View>
           </View>
         </View>
         <View style={styles.pbox}>
           <Text style={styles.question}>
             How likely are you to purchase our new products/services
           </Text>
-          <View style={styles.pPicker}>
-            <Picker
-              selectedValue={data.likely}
-              onValueChange={itemValue => setData({...data, likely: itemValue})}
-              style={styles.picker}>
-              <Picker.Item label="Not likely" value="not likely" />
-              <Picker.Item label="Somewhat likely" value="somewhat likely" />
-              <Picker.Item label="Likely" value="likely" />
-            </Picker>
-            {/* <TextInput
+          <View style={styles.box}>
+            <View style={styles.pPicker}>
+              <Picker
+                selectedValue={data.likely}
+                onValueChange={itemValue =>
+                  setData({...data, likely: itemValue})
+                }
+                style={styles.picker}>
+                <Picker.Item label="Not likely" value="not likely" />
+                <Picker.Item label="Somewhat likely" value="somewhat likely" />
+                <Picker.Item label="Likely" value="likely" />
+              </Picker>
+              {/* <TextInput
               style={styles.answer}
               value={data.likely}
               onChangeText={likely => setData({...data, likely})}
             /> */}
+            </View>
           </View>
         </View>
-        <View>
-          <Button title="Submit" onPress={sendData} />
-          <Button title="Get" onPress={getData} />
-        </View>
+        <TouchableOpacity
+          onPress={sendData}
+          style={[styles.button, isClicked && styles.clickedButton]}>
+          <Text style={styles.buttonText}>Submit</Text>
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
@@ -158,6 +164,7 @@ const Survey = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    marginTop: 50,
   },
   question: {
     fontSize: 20,
@@ -168,6 +175,8 @@ const styles = StyleSheet.create({
   },
   answer: {
     width: '90%',
+    height: 55,
+    padding: 10,
     color: 'black',
     fontSize: 20,
     borderColor: 'gray',
@@ -184,18 +193,30 @@ const styles = StyleSheet.create({
   },
   picker: {
     width: '90%',
+    color: 'black',
+  },
+  pPicker: {
+    width: '90%',
     alignItems: 'center',
     color: 'black',
-    borderColor: 'black',
+    borderColor: 'gray',
     borderWidth: 1,
     borderRadius: 10,
   },
-  pPicker: {
-    width: '100%',
-    color: 'black',
-    borderColor: 'black',
-    borderWidth: 1,
-    borderRadius: 10,
+  button: {
+    backgroundColor: '#007BFF',
+    padding: 10,
+    paddingRight: 20,
+    paddingLeft: 20,
+    borderRadius: 5,
+    alignItems: 'center',
+  },
+  clickedButton: {
+    backgroundColor: 'red',
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 20,
   },
 });
 

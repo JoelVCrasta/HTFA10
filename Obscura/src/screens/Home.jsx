@@ -1,13 +1,15 @@
 import React from 'react';
-import {Text, View, StyleSheet, SafeAreaView} from 'react-native';
+import {Text, View, StyleSheet, SafeAreaView, ScrollView} from 'react-native';
 import Header from '../components/Header';
 import Survey from '../components/Survey';
 
 const Home = () => {
   return (
     <SafeAreaView style={styles.container}>
-      <Header />
-      <Survey />
+      <ScrollView>
+        <Header />
+        <Survey />
+      </ScrollView>
     </SafeAreaView>
   );
 };
