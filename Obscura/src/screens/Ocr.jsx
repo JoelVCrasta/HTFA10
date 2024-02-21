@@ -5,12 +5,28 @@ import {
   StyleSheet,
   View,
   TouchableOpacity,
+  ScrollView,
 } from 'react-native';
 import {launchImageLibrary} from 'react-native-image-picker';
 import MlkitOcr from 'react-native-mlkit-ocr';
+import {supabase} from '../lib/supabaseClient.js';
 
 const Ocr = () => {
-  const [image, setImage] = useState(null);
+  const [text, setText] = useState('');
+
+  const sendData = async () => {
+    try {
+      const {data, error} = await supabase
+        .from('ocr')
+        .insert({recog_text: text});
+      if (data) {
+        console.log(data);
+      }
+      if (error) throw error;
+    } catch (error) {
+      console.log('Error', error.message);
+    }
+  };
 
   const pickImage = async () => {
     try {
@@ -24,20 +40,24 @@ const Ocr = () => {
       };
 
       const result = await launchImageLibrary(options);
-      //console.log(result.assets[0].uri);
 
       if (result.didCancel) {
         console.log('User cancelled image picker');
       } else if (result.error) {
         console.log('ImagePicker Error: ', result.error);
       } else {
-        setImage(result.assets[0].uri);
         ocrDetect(result.assets[0].uri);
       }
     } catch (e) {
       console.log(e);
     }
   };
+
+  useEffect(() => {
+    if (text) {
+      sendData();
+    }
+  }, [text]);
 
   async function ocrDetect(imageUri) {
     try {
@@ -47,12 +67,10 @@ const Ocr = () => {
         resultFromUri.forEach(block => {
           extractedText += block.text + ' ';
         });
+        setText(extractedText);
       } else {
-        console.log('Unexpected structure of OCR result:', resultFromUri);
+        console.log('Unexpected structure of OCR result');
       }
-
-      console.log(extractedText);
-      //console.log(resultFromUri);
     } catch (e) {
       console.log(e);
     }
@@ -68,6 +86,12 @@ const Ocr = () => {
           <Text style={styles.text}>Open Camera</Text>
         </TouchableOpacity>
       </View>
+
+      <View style={styles.rbox}>
+        <ScrollView>
+          <Text style={styles.rtext}>{text}</Text>
+        </ScrollView>
+      </View>
     </SafeAreaView>
   );
 };
@@ -80,7 +104,7 @@ const styles = StyleSheet.create({
     width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 150,
+    marginTop: 120,
   },
   press: {
     backgroundColor: '#ba181b',
@@ -105,6 +129,20 @@ const styles = StyleSheet.create({
     backgroundColor: '#ba181b',
     paddingTop: 10,
     paddingBottom: 10,
+  },
+  rbox: {
+    borderColor: 'gray',
+    borderWidth: 2,
+    borderRadius: 10,
+    marginHorizontal: 20,
+    marginVertical: 30,
+    padding: 5,
+    height: 400,
+  },
+  rtext: {
+    color: 'black',
+    fontSize: 18,
+    margin: 10,
   },
 });
 

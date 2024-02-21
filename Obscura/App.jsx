@@ -4,6 +4,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {NavigationContainer} from '@react-navigation/native';
 import Home from './src/screens/Home.jsx';
 import Ocr from './src/screens/Ocr.jsx';
+import Qna from './src/screens/Qna.jsx';
 
 const Tab = createBottomTabNavigator();
 
@@ -14,6 +15,7 @@ const App = () => {
         screenOptions={{
           tabBarActiveTintColor: '#ba181b',
           tabBarInactiveTintColor: 'gray',
+          headerShown: false,
           tabBarStyle: {
             height: 60,
             paddingBottom: 10,
@@ -34,6 +36,18 @@ const App = () => {
         <Tab.Screen
           name="OCR"
           component={Ocr}
+          options={{
+            tabBarIconStyle: {display: 'none'},
+            tabBarLabelStyle: {
+              fontSize: 20,
+              marginBottom: 6,
+              fontWeight: 'bold',
+            },
+          }}
+        />
+        <Tab.Screen
+          name="QnA"
+          component={Qna}
           options={{
             tabBarIconStyle: {display: 'none'},
             tabBarLabelStyle: {
