@@ -11,20 +11,35 @@ import {
 import {Picker} from '@react-native-picker/picker';
 import {supabase} from '../lib/supabaseClient.js';
 import CryptoJS from 'crypto-js';
+import {faker} from '@faker-js/faker';
 // import bcrypt from 'react-native-bcrypt';
 
 const Survey = () => {
   const [data, setData] = useState({
     name: '',
     occupation: '',
+    location: '',
     amount: 'below $50',
     purchases: 'below 5',
     likely: 'not likely',
   });
 
+  const generateFakeData = () => {
+    const fakeName = faker.person.firstName();
+    const fakeLocation = faker.location.city();
+    const fakeOcupation = faker.commerce.department();
+
+    setData({
+      ...data,
+      name: fakeName,
+      location: fakeLocation,
+      occupation: fakeOcupation,
+    });
+  };
+
   const [survey, setSurvey] = useState(false);
 
-  const allData = `name: ${data.name}, occupation: ${data.occupation}, amount: ${data.amount}, purchases: ${data.purchases}, likely: ${data.likely}`;
+  const allData = `name: ${data.name}, location: ${data.location}, occupation: ${data.occupation}, amount: ${data.amount}, purchases: ${data.purchases}, likely: ${data.likely}`;
 
   const key = CryptoJS.enc.Utf8.parse('v5T2RpmzkuU2qyMQXVYyqx7Wpnv');
   const iv = CryptoJS.enc.Utf8.parse('EqZywEkfyeZkpGt2');
@@ -44,6 +59,7 @@ const Survey = () => {
 
   const sendData = async () => {
     try {
+      generateFakeData();
       const hashedData = hashData();
       const {data, error} = await supabase
         .from('fable')
@@ -85,6 +101,16 @@ const Survey = () => {
                 style={styles.answer}
                 value={data.name}
                 onChangeText={name => setData({...data, name})}
+              />
+            </View>
+          </View>
+          <View style={styles.pbox}>
+            <Text style={styles.question}>Enter your location</Text>
+            <View style={styles.box}>
+              <TextInput
+                style={styles.answer}
+                value={data.location}
+                onChangeText={location => setData({...data, location})}
               />
             </View>
           </View>
