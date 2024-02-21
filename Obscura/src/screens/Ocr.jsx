@@ -83,7 +83,7 @@ const Ocr = () => {
       </View>
       <View style={styles.box}>
         <TouchableOpacity style={styles.press} onPress={pickImage}>
-          <Text style={styles.text}>Open Camera</Text>
+          <Text style={styles.text}>Pick Image</Text>
         </TouchableOpacity>
       </View>
 
