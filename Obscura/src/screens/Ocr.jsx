@@ -10,9 +10,23 @@ import {
 import {launchImageLibrary} from 'react-native-image-picker';
 import MlkitOcr from 'react-native-mlkit-ocr';
 import {supabase} from '../lib/supabaseClient.js';
+import CryptoJS from 'crypto-js';
 
 const Ocr = () => {
   const [text, setText] = useState('');
+  const [text2, setText2] = useState('');
+
+  const key = CryptoJS.enc.Utf8.parse('v5T2RpmzkuU2qyMQXVYyqx7Wpnv');
+  const iv = CryptoJS.enc.Utf8.parse('EqZywEkfyeZkpGt2');
+
+  function hashData(extractedText) {
+    const encrypted = CryptoJS.AES.encrypt(extractedText, key, {
+      iv: iv,
+      mode: CryptoJS.mode.CBC,
+      padding: CryptoJS.pad.Pkcs7,
+    });
+    setText(encrypted.toString());
+  }
 
   const sendData = async () => {
     try {
@@ -67,7 +81,8 @@ const Ocr = () => {
         resultFromUri.forEach(block => {
           extractedText += block.text + ' ';
         });
-        setText(extractedText);
+        hashData(extractedText);
+        setText2(extractedText);
       } else {
         console.log('Unexpected structure of OCR result');
       }
@@ -89,7 +104,7 @@ const Ocr = () => {
 
       <View style={styles.rbox}>
         <ScrollView>
-          <Text style={styles.rtext}>{text}</Text>
+          <Text style={styles.rtext}>{text2}</Text>
         </ScrollView>
       </View>
     </SafeAreaView>
